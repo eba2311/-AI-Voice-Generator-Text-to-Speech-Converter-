@@ -1,1 +1,344 @@
 
+/* ==================================================
+   GLOBAL RESET AND BASE STYLING
+   ================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ==================================================
+   BACKGROUND (Animated Gradient)
+   ================================================== */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #000428, #004e92);
+  color: #fff;
+  transition: all 0.5s ease;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #00ffff, #007bff, #00ffcc, #00d4ff);
+  background-size: 300% 300%;
+  animation: moveGradient 15s ease infinite;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==================================================
+   HERO SECTION (GLASS EFFECT CONTAINER)
+   ================================================== */
+.hero {
+  width: 90%;
+  max-width: 650px;
+  padding: 2.5rem;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: all 0.6s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero:hover {
+  box-shadow: 0 0 60px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ==================================================
+   TITLE AND TEXT STYLING
+   ================================================== */
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px #00ffff, 0 0 40px #00d4ff;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.hero h1 span {
+  color: #00ffff;
+  text-shadow: 0 0 25px #00ffff;
+}
+
+/* Animated speaker icon */
+.hero h1::after {
+  content: "🔊";
+  margin-left: 10px;
+  animation: pulseIcon 2s infinite;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* ==================================================
+   TEXTAREA DESIGN
+   ================================================== */
+textarea {
+  width: 100%;
+  height: 180px;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 1rem;
+  font-size: 1rem;
+  resize: none;
+  outline: none;
+  transition: all 0.4s ease;
+  box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+textarea::placeholder {
+  color: #b0eaff;
+  font-style: italic;
+}
+
+textarea:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.02);
+  box-shadow: 0 0 25px #00ffff;
+}
+
+textarea:focus {
+  border-color: #00ffff;
+  box-shadow: 0 0 25px #00ffff, 0 0 40px #007bff;
+  transform: scale(1.03);
+}
+
+/* Scrollbar */
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4ff, #007bff);
+  border-radius: 10px;
+}
+
+/* ==================================================
+   CONTROL ROW (Select, Buttons, Icons)
+   ================================================== */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Dropdown Menu */
+select {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+select:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px #00ffff;
+}
+
+/* ==================================================
+   BUTTON DESIGN (Speak, Stop, etc.)
+   ================================================== */
+button {
+  border: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #00d4ff, #007bff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 25px #00d4ff, 0 0 50px #007bff;
+}
+
+button:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 15px #00d4ff;
+}
+
+/* Button glow effect */
+button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+button:hover::before {
+  opacity: 1;
+  animation: shine 1.2s linear infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* ==================================================
+   ICON STYLING
+   ================================================== */
+.fa-play, .fa-stop, .fa-microphone {
+  font-size: 1.3rem;
+  transition: all 0.4s ease;
+}
+
+.fa-play:hover {
+  transform: rotate(360deg);
+  color: #00ffcc;
+}
+
+.fa-microphone {
+  color: #00ffff;
+  animation: micPulse 2s infinite;
+}
+
+@keyframes micPulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ==================================================
+   STATUS SECTION
+   ================================================== */
+.status {
+  margin-top: 1.5rem;
+  color: #aaffff;
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px #00ffff;
+  letter-spacing: 0.5px;
+}
+
+/* ==================================================
+   RESPONSIVE DESIGN
+   ================================================== */
+
+/* Tablets and smaller laptops */
+@media (max-width: 1024px) {
+  .hero {
+    width: 95%;
+    padding: 2rem;
+  }
+  textarea {
+    height: 160px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 768px) {
+  .hero {
+    padding: 1.8rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  textarea {
+    height: 140px;
+    font-size: 0.95rem;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  select, button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .hero {
+    border-radius: 15px;
+    padding: 1.4rem;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  textarea {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==================================================
+   ANIMATED GLOW (All Elements)
+   ================================================== */
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #00ffff; }
+  50% { box-shadow: 0 0 30px #00d4ff; }
+  100% { box-shadow: 0 0 10px #00ffff; }
+}
+
+.hero, textarea, select, button {
+  animation: glow 4s infinite alternate;
+}
